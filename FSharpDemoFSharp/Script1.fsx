@@ -69,3 +69,12 @@ let getFamilyMemberWithAge age =
     else Dog "Rover"
 
 getFamilyMemberWithAge 6
+
+(*** Immutability and Loops ***)
+
+let sum values =
+    let rec calcSum total remainingValues = 
+        match remainingValues with
+        | [] -> total
+        | x :: xs -> calcSum (total + x) xs
+    calcSum 0 values
