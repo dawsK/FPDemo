@@ -52,6 +52,7 @@
     <None Include="FSPrimer.fsx" />
     <None Include="WhyUseIt.fsx" />
     <None Include="Concepts.fsx" />
+    <None Include="Sample.fsx" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
