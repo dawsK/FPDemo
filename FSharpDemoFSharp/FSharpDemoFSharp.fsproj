@@ -50,7 +50,6 @@
     <Compile Include="Program.fs" />
     <None Include="App.config" />
     <None Include="FSPrimer.fsx" />
-    <None Include="WhyUseIt.fsx" />
     <None Include="Concepts.fsx" />
     <None Include="Sample.fsx" />
   </ItemGroup>

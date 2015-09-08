@@ -19,7 +19,26 @@ let echoPort port =
 let sendToPort port message =
     use udpClient = new UdpClient("127.0.0.1", port)
     let bytes = Text.Encoding.UTF8.GetBytes(s = message)
-    udpClient.Send(bytes, bytes |> Array.length)
+    udpClient.Send(bytes, bytes |> Array.length) |> ignore
+
+// run in a different fsi.exe instance
+echoPort 8888 |> Async.StartImmediate
+sendToPort 8888 "Howdy kids"
+
+let testSend numSends =
+    let rec loop ix =
+        match ix with
+        | i when i < numSends -> 
+            let message = sprintf "test #%i" i
+            printfn "test %i" i
+            sendToPort 8888 message
+            System.Threading.Thread.Sleep(100)
+            loop (i + 1)
+        | _ -> ix
+    loop 0
+
+let numSent = testSend 5
+printf "Sent: %d" numSent
 
 let getAvailablePorts startingPort numPorts =
     let udpListeners = NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().GetActiveUdpListeners()
@@ -35,6 +54,5 @@ let getAvailablePorts startingPort numPorts =
         |> Seq.toList
 
 getAvailablePorts 8885 5
-echoPort 8888 |> Async.StartImmediate
-sendToPort 8888 "Howdy kids"
+echoPort 8889 |> Async.StartImmediate
 getAvailablePorts 8885 5
